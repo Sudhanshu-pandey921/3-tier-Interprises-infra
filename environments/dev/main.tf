@@ -60,6 +60,7 @@ module "nics" {
   location            = each.value.location
   resource_group_name = module.rg[each.value.rg_key].resource_group_name
   subnet_id           = module.subnet[each.value.subnet_key].subnet_id
+    public_ip_id        = module.public_ip["dev-pip"].public_ip_id
   depends_on          = [module.rg, module.subnet, module.nsg]
 }
 
@@ -74,7 +75,7 @@ module "vm" {
   admin_password      = data.azurerm_key_vault_secret.kv_secret.value
   nic_ids             = [module.nics[each.value.nics_key].nic_id]
 
-  depends_on = [module.rg, module.vnet, module.subnet, module.nsg, module.nics]
+  depends_on = [module.rg,  module.nics]
 }
 
 module "mysql" {
@@ -83,22 +84,20 @@ module "mysql" {
   sql_server_name     = each.value.sql_server_name
   location            = each.value.location
   resource_group_name = module.rg["dev"].resource_group_name
-  sql_admin_username  = data.azurerm_key_vault_secret.kv_secret.value
-  sql_admin_password  = data.azurerm_key_vault_secret.kv_secret.value
-
+   sql_admin_username  = data.azurerm_key_vault_secret.sql_username.value
+  sql_admin_password  = data.azurerm_key_vault_secret.sql_password.value
   depends_on = [module.rg]
 }
 
 module "database" {
   source      = "../../modules/sql_database"
   for_each    = var.sql_database
-  sql_db_name = each.value.name
-  server_id   = module.mysql[each.value.mysql_key].sql_server_id
+  sql_db_name = each.value.sql_db_name
+  server_id   = module.mysql["sql"].sql_server_id
   max_size_gb = 2
 
   depends_on = [module.mysql]
-}
-
+  }
 
 
 

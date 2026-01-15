@@ -55,6 +55,7 @@ variable "nics" {
     location   = string
     rg_key     = string
     subnet_key = string
+    pip_key = string
   }))
 }
 

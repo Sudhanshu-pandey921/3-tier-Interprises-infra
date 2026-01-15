@@ -1,17 +1,16 @@
-# 3-Tier Enterprises Infrastructure
+# 3-Tier Enterprise Infrastructure on Azure
 
-> Professional Terraform-based Azure infrastructure for a 3-tier application (web → app → data).
+A production-ready Terraform configuration for deploying a scalable 3-tier application infrastructure on Microsoft Azure. This includes web tier, application tier, and database tier with proper networking, security, and modularity.
 
+## 🌟 Key Features
 
-## 🚀 Project Overview
-
-This repository contains Terraform configurations and reusable modules to provision a 3-tier application infrastructure on Microsoft Azure. The design separates environment-specific configurations (e.g., `dev`, `prod`) from reusable modules (networking, VMs, databases), enabling consistent, repeatable deployments.
-
-Key goals:
-- Modular, testable Terraform code
-- Environment isolation (dev / prod)
-- Reusable modules for cloud resources
-- Clear variables/outputs to support automation and CI/CD
+- **Modular Design** - Reusable Terraform modules organized by function
+- **Multi-Environment** - Separate dev and prod configurations with full isolation
+- **Security-First** - Network Security Groups, proper VNET segmentation, layered access control
+- **High Availability** - Support for multiple VMs and replicated databases
+- **Enterprise-Ready** - Follows HashiCorp and Azure best practices
+- **Comprehensive Documentation** - Architecture, deployment, modules, and troubleshooting guides
+- **CI/CD Ready** - Optional GitHub Actions integration for automated deployments
 
 
 ---

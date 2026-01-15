@@ -17,3 +17,8 @@ variable "subnet_id" {
   description = "The ID of the subnet to which the NIC will be connected."
   type        = string
 }
+
+variable "public_ip_id" {
+  type    = string
+  default = null
+}
